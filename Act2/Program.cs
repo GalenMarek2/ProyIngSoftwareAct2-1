@@ -9,34 +9,35 @@ string newFolderPath = "D:\\Users\\Maurizio Patiño\\Desktop\\IDS 8 sem\\Proyect
 string logFileName = "a2_matricula.txt";
 string logFilePath = $"D:\\Users\\Maurizio Patiño\\Desktop\\IDS 8 sem\\Proyectos de ingenieria de software\\Act2\\Act2\\Log\\{logFileName}";
 
+string newFile = "";
+
 
 string[] files = Directory.GetFiles(folderPath);
 
-//foreach (string file in files)
-//{
-string file = "D:\\\\Users\\\\Maurizio Patiño\\\\Downloads\\\\CS13309_Archivos_HTML\\\\Files\\\\002.html";
-if (File.Exists(file))
+foreach (string file in files)
 {
-    string fileName = Path.GetFileName(file);
-    string fileContent = File.ReadAllText(file);
-
-    if (!fileContent.Any())
+    if (File.Exists(file))
     {
-        Console.WriteLine("No hay contenido en el archivo.");
-        return;
+        string fileName = Path.GetFileName(file);
+        string fileContent = File.ReadAllText(file);
+
+        if (!fileContent.Any())
+        {
+            Console.WriteLine("No hay contenido en el archivo.");
+            return;
+        }
+
+        RemoveHtmlTags(fileName, file);
+
+        string logFile = GetOrCreateLogFile();
+
+
     }
-
-    RemoveHtmlTags(fileName);
-
-    string logFile = GetOrCreateLogFile();
-
-
 }
-//}
 
-void RemoveHtmlTags(string fileName)
+void RemoveHtmlTags(string fileName, string file)
 {
-    string newFile = Path.Combine(newFolderPath, fileName);
+    newFile = Path.Combine(newFolderPath, fileName);
 
     File.Copy(file, newFile);
 
@@ -58,14 +59,4 @@ string GetOrCreateLogFile()
 
 }
 
-
-
-
-//File.ReadAllText(folderPath);
-
-//if (!File.Exists(folderPath))
-//{
-//    Console.WriteLine($"El archivo ubicado en: {folderPath} no existe.");
-//    return;
-//}
 
