@@ -11,11 +11,14 @@ string logFilePath = $"D:\\Users\\Maurizio Patiño\\Desktop\\IDS 8 sem\\Proyecto
 
 string newFile = "";
 
-
 string[] files = Directory.GetFiles(folderPath);
+
+Stopwatch tiempoTotal = Stopwatch.StartNew();
 
 foreach (string file in files)
 {
+    Stopwatch tiempoArchivo = Stopwatch.StartNew();
+    
     if (File.Exists(file))
     {
         string fileName = Path.GetFileName(file);
